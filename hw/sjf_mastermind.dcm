@@ -1,0 +1,16 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP AP2112
+D 3V3 Level Shifter
+$ENDCMP
+#
+$CMP ESP32_THING
+D ESP32 Thing by Sparkfun
+K ESP32_Thing
+$ENDCMP
+#
+$CMP LevelShifter
+D 3V3 Level Shifter
+$ENDCMP
+#
+#End Doc Library

@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name sjf_mastermind)(type KiCad)(uri "$(KIPRJMOD)/sjf_mastermind.pretty")(options "")(descr ""))
+)
