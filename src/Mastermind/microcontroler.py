@@ -3,6 +3,7 @@ try:
     from machine import Pin
     import random
     import time
+    import  gc
 except:
     print("Imports are not available")
 
@@ -20,6 +21,8 @@ oldState = [0,0,0]
 solution = [0,0,0,0]
 pointerIndex = 0
 colors = [(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,127)]
+tries = 0
+arrayOfAllStillPossibleCombinations = [[]]
 
 #buttons
 button0 = Pin(12, Pin.IN)
@@ -67,7 +70,6 @@ def SetStartcode():
     while(True):
         SetSolutionLEDRow()
         SetCursorLed()
-        print("tick")
         test = WaitForNextButtonInput()
         if(test == 2 or pointerIndex == 3):
             StartAlgorithm()
@@ -80,8 +82,11 @@ def SetStartcode():
 
 # starts the algorithm that plays the game
 def StartAlgorithm():
-    ClearPannel()
-    print("Finished!")
+    global  solution, arrayOfAllStillPossibleCombinations
+    DeleteRow(1)
+    arrayOfAllStillPossibleCombinations = GetAllCombinationsArray()
+    gc.collect()
+    SolveMastermind(solution)
 
 #function which sets the top line of the LED pannel to the solution array
 def SetSolutionLEDRow():
@@ -110,11 +115,108 @@ def SetCursorLed():
     neoPixel[pointerIndex+8] = (0, 255, 0)
     neoPixel.write()
 
+# compares to colorcode arrays and returns a touple with the correct and the semi correct values.
+def compare(a, b):
+    a = list(a)
+    b = list(b)
+
+    corrects = 0;
+    semiCorrects = 0;
 
 
-neoPixel[42] = (0,255,0)
-neoPixel.write()
-print("worked")
+    for x in range(0,4):
+        if (a[x] == b[x]):
+            a[x] = -1
+            b[x] = -2
+            corrects += 1
+
+    for x in range(0,4):
+        for y in range(0,4):
+            if(a[x] == b[y]):
+                a[x] = -1
+                b[y] = -2
+                semiCorrects += 1
+                break
+
+    return(corrects,semiCorrects)
+
+# returns all arrays that could also have the same solution as the result from arr
+#by compare()ing arr and all possible combinations
+def GetSimilarArrays(index, result):
+    global arrayOfAllStillPossibleCombinations
+
+    k = list(arrayOfAllStillPossibleCombinations[index])
+    del (arrayOfAllStillPossibleCombinations[index])
+    x = 0
+    while (x < len(arrayOfAllStillPossibleCombinations)):
+
+        sol = compare(arrayOfAllStillPossibleCombinations[x], k)
+
+        if (sol != result):
+            del (arrayOfAllStillPossibleCombinations[x])
+            x -= 1
+        x += 1
+
+#returns an array with all possible combinations
+def GetAllCombinationsArray():
+    arr = [[None for _ in range(4)] for _ in range(1296)]
+    i = 0
+
+    for x in range(0, 6):
+        for y in range(0, 6):
+            for z in range(0, 6):
+                for j in range(0, 6):
+                    arr[i][0] = x
+                    arr[i][1] = y
+                    arr[i][2] = z
+                    arr[i][3] = j
+                    i += 1
+    return arr
+
+
+#function that solves the mastermind and displays it
+def SolveMastermind(solution):
+    global tries,arrayOfAllStillPossibleCombinations
+
+    index = ((len(arrayOfAllStillPossibleCombinations)*4) // 13)
+
+
+    copiedArray = list(arrayOfAllStillPossibleCombinations[index])
+
+    touple = compare(copiedArray,solution)
+
+    #output the try and result on the display
+    WriteIterationToLEDs(index,touple)
+
+    GetSimilarArrays(index, touple)
+    gc.collect()
+
+
+
+    if( len(arrayOfAllStillPossibleCombinations)== 0):
+       # output a fancy solved line
+        return
+    tries += 1
+    SolveMastermind(solution)
+
+
+def WriteIterationToLEDs(index, result):
+    global arrayOfAllStillPossibleCombinations
+    row = tries+2
+
+    for x in range (0,4):
+        neoPixel[x+(row*8)] = colors[arrayOfAllStillPossibleCombinations[index][x]]
+
+    total = result[0]+result[1]
+    for x in range(0,result[0]):
+        neoPixel[x+8-total+(row*8)] = (255,255,255)
+    for x in range(0,result[1]):
+        neoPixel[x+8-total+(row*8)] = (255,0,0)
+
+
+
+    neoPixel.write()
+
 
 SetStartcode()
 

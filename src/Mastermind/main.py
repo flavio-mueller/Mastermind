@@ -54,10 +54,10 @@ def solveMastermind(arr, solution):
     #index = arr.size//8 #avg case 4.911265432098766 worst 9
     #index = arr.size//12 #avg case 4.817901234567901 worst 7
     #index = (arr.size//8//6)-1 #avg case 4.641203703703703 worst 7
-    #index = (arr.size // 13) #avg case 4.636574074074074 worst 7
+    index = (arr.size // 13) #avg case 4.636574074074074 worst 7
     #index = (int)(arr.size //4 //3.14159265359) #avg case = 4.677469135802469
     #index = (arr.size // 13)-1 #avg case 4.589506172839506
-    index = (int)(pow(arr.size//4,0.5))-1 #avg case 4.582561728395062
+    #index = (int)(pow(arr.size//4,0.5))-1 #avg case 4.582561728395062
 
     #try to always get XXYY #avg case 4.753086419753086 worst 8
     '''index = arr.size//8//6
@@ -73,9 +73,10 @@ def solveMastermind(arr, solution):
             index = x
             break'''
 
-
+    print(index)
+    print(arr.size)
     touple = compare(arr[index],solution)
-    #print("Tried ", arr[index] ," and got ",touple[0], "hits and ", touple[1], " correct colors.")
+    print("Tried ", arr[index] ," and got ",touple[0], "hits and ", touple[1], " correct colors.")
 
     arr = getSimilarArrays(arr,index, touple)
 
@@ -123,13 +124,13 @@ def getAverageCase():
     print("Average Case = ", value/index)
     print("Worst case = ", worstValue)
 
-a = np.array([3,5,4,2])
+a = np.array([0,0,0,0])
 b = np.array([0,1,0,3])
 
 #print(compare(a,b))
 
 
-#solveMastermind(getFilledArray(),a)
+solveMastermind(getFilledArray(),a)
 
-getAverageCase()
+
 
