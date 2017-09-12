@@ -77,7 +77,7 @@ def solveMastermind(arr, solution):
     touple = compare(arr[index],solution)
     #print("Tried ", arr[index] ," and got ",touple[0], "hits and ", touple[1], " correct colors.")
 
-    arr = getSimliarArrays(arr,index, touple)
+    arr = getSimilarArrays(arr,index, touple)
 
 
     #print("__________________________")
