@@ -2,7 +2,6 @@ try:
     from neopixel import NeoPixel
     from machine import Pin
     import random
-    import utime
 except:
     print("Imports are not available")
 
@@ -19,6 +18,7 @@ state_reset = 8
 state = state_reset
 
 numPixel = 64
+maxRows = 8
 neoPin = Pin(18, Pin.OUT)
 
 neoPixel = NeoPixel(neoPin, numPixel)
@@ -65,11 +65,6 @@ row = 1
 
 counter = 0
 
-neoPixel.fill(colBlack)
-neoPixel[counter] = (colors[curCol])
-neoPixel.write()
-
-
 def checkButton1():
     global button1State
     global button1Released
@@ -93,14 +88,14 @@ def checkButton2():
 
 
 def checkButton3():
-    global button3State
-    global button3Released
+    global button3State, state, button3Released
 
     button3StateOld = button3State
     button3State = button3.value()
     button3Released = button3StateOld == 1 and button3State == 0
     if button3Released:
         print("button3 was pressed")
+        state = state_reset
 
 
 """def checkButton4():
@@ -216,9 +211,10 @@ def checking():
                 tempColorSet[i] = -3
                 tempColorSetTT[j] = -4
                 neoPixel.write()
+
     if counterGreen == 3:
         state = state_won
-    elif row < 8:
+    elif row < maxRows:
         state = state_codeGuessing
     else:
         state = state_outOfTries
@@ -226,24 +222,27 @@ def checking():
 
 def won():
     global state
+    print("You have won")
     neoPixel.fill(colGreen)
     state = state_waitForReset
 
 def outOfTries():
     global state
+    print("No tries left")
     neoPixel.fill(colRed)
     state = state_waitForReset
 
 
 def waitForReset():
     global state
-    print(state)
-    #state = state_reset
+    print("Waiting for Reset (Button 3)")
 
 
 def reset():
     global state
-    print(state)
+    neoPixel.fill(colBlack)
+    neoPixel[counter] = (colors[curCol])
+    neoPixel.write()
     state = state_codeSetting
     print("Game was reseted")
 
