@@ -43,30 +43,27 @@ button2Released = 0
 button3Released = 0
 # button4Released = 0
 
-brightness = 10
-
-colBlue = (0, 0, brightness)
-colRed = (brightness, 0, 0)
-colGreen = (0, brightness, 0)
-colYellow = (brightness, brightness, 0)
-colTurquoise = (0, brightness, brightness)
-colPink = (brightness, 0, brightness)
+colBlue = (0, 0, 255)
+colRed = (255, 0, 0)
+colGreen = (0, 255, 0)
+colYellow = (255, 255, 0)
+colTurquoise = (0, 255, 255)
+colPink = (255, 0, 255)
 colBlack = (0, 0, 0,)
-colWhite = (brightness, brightness, brightness)
+colWhite = (255, 255, 255)
 
 colors = [colBlue, colRed, colGreen, colYellow, colTurquoise, colPink, colBlack, colWhite]
 
 curCol = 0
 
 colorSet = [0, 0, 0, 0]
-rowColorSet = [[0 for x in range(6)] for y in range(maxRows)]
+tempColorSet = [0, 0, 0, 0]
 
 temBoolean = 1
 
 row = 1
 
 counter = 0
-
 
 def checkButton1():
     global button1State
@@ -92,6 +89,7 @@ def checkButton2():
 
 def checkButton3():
     global button3State, state, button3Released
+
     button3StateOld = button3State
     button3State = button3.value()
     button3Released = button3StateOld == 1 and button3State == 0
@@ -153,13 +151,12 @@ def autoSet():
 
 
 def codeGuessing():
-    global state, curCol, counter, row, temBoolean, rowColorSet
+    global state, curCol, tempColorSet, counter, row, temBoolean
     button2LED(1)
     if temBoolean:
         neoPixel[counter + 8 * row] = (colors[curCol])
         neoPixel.write()
         temBoolean = 0
-
     if button1Released:
         curCol = (curCol + 1) % 6
         neoPixel[counter + 8 * row] = (colors[curCol])
@@ -168,8 +165,7 @@ def codeGuessing():
 
     if button2Released:
         print("Color set")
-        print(row, counter)
-        rowColorSet[row][counter] = curCol
+        tempColorSet[counter] = curCol
         curCol = 0
         counter += 1
         if counter < 4:
@@ -181,6 +177,7 @@ def codeGuessing():
         counter = 0
         curCol = 0
         temBoolean = 1
+        row += 1
         button1LED(0)
         button2LED(0)
         state = state_checking
@@ -193,62 +190,46 @@ def autoGuess():
 
 
 def checking():
-    global state, row, rowColorSet
-    global colorSet
-    print("State: Checking")
+    global state, row, tempColorSet
     counterGreen = 0
     counterWhite = 0
-    tempColorSet = list(colorSet)
-    tempRowColorSet = list(rowColorSet)
-    for i in range(4):
-        if tempColorSet[i] == tempRowColorSet[row][i]:
-            neoPixel[4 + counterGreen + 8 * row] = colGreen
-            tempRowColorSet[row][i] = -1
-            tempColorSet[i] = -2
+    tempColorSetTT = colorSet
+    for i in range(len(tempColorSetTT)):
+        if tempColorSetTT[i] == tempColorSet[i]:
+            neoPixel[4 + counterGreen + 8 * (row - 1)] = colGreen
+            tempColorSet[i] = -1
+            tempColorSetTT[i] = -2
             counterGreen += 1
             neoPixel.write()
 
-    for i in range(4):
-        for j in range(4):
-            if tempColorSet[i] == tempRowColorSet[row][j]:
-                neoPixel[4 + counterGreen + counterWhite + 8 * row] = colWhite
-                neoPixel.write()
+        for j in range(len(tempColorSetTT)):
+            if tempColorSetTT[i] == tempColorSet[j]:
+                if counterGreen > 0:
+                    counterWhite += 1
+                neoPixel[4 + counterGreen + counterWhite + 8 * (row - 1)] = colWhite
                 counterWhite += 1
-                tempRowColorSet[row][j] = -3
-                tempColorSet[i] = -4
+                tempColorSet[i] = -3
+                tempColorSetTT[j] = -4
+                neoPixel.write()
 
-    tempRowColorSet[row][4] = counterGreen
-    tempRowColorSet[row][5] = counterWhite
-
-    rowColorSet[row][4] = counterGreen
-    rowColorSet[row][5] = counterWhite
-
-    if counterGreen == 4:
+    if counterGreen == 3:
         state = state_won
-    elif row < (maxRows - 1):
-        row += 1
+    elif row < maxRows:
         state = state_codeGuessing
     else:
         state = state_outOfTries
-
-    print("Colorset: ", colorSet)
-    print("Rowcolorset: ", rowColorSet)
-    print("temprowcolorset: ", tempRowColorSet)
 
 
 def won():
     global state
     print("You have won")
     neoPixel.fill(colGreen)
-    neoPixel.write()
     state = state_waitForReset
-
 
 def outOfTries():
     global state
     print("No tries left")
     neoPixel.fill(colRed)
-    neoPixel.write()
     state = state_waitForReset
 
 
@@ -260,7 +241,6 @@ def waitForReset():
 def reset():
     global state
     neoPixel.fill(colBlack)
-    counter = 0
     neoPixel[counter] = (colors[curCol])
     neoPixel.write()
     state = state_codeSetting
