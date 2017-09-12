@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/naopross/docs/sjf/mastermind/hw/mastermind.sch)
-    (date "Mon 11 Sep 2017 02:32:10 PM CEST")
+    (date "Tue 12 Sep 2017 10:41:18 AM CEST")
     (tool "Eeschema 4.0.6")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -145,6 +145,7 @@
         (pin (num 11) (name 26) (type input))
         (pin (num 12) (name 25) (type input))
         (pin (num 13) (name 35) (type input))
+        (pin (num 14) (name 34) (type input))
         (pin (num 15) (name 33) (type input))
         (pin (num 16) (name 32) (type input))
         (pin (num 17) (name 39) (type input))
@@ -210,10 +211,10 @@
         (pin (num 3) (name K) (type passive))
         (pin (num 4) (name ~) (type passive)))))
   (libraries
-    (library (logical conn)
-      (uri /usr/share/kicad/library/conn.lib))
     (library (logical device)
       (uri /usr/share/kicad/library/device.lib))
+    (library (logical conn)
+      (uri /usr/share/kicad/library/conn.lib))
     (library (logical sjf_mastermind)
       (uri /home/naopross/docs/sjf/mastermind/hw/sjf_mastermind.lib)))
   (nets
@@ -332,7 +333,8 @@
     (net (code 39) (name "Net-(U2-Pad4)")
       (node (ref U2) (pin 4)))
     (net (code 40) (name /LED3)
-      (node (ref R3) (pin 2)))
+      (node (ref R3) (pin 2))
+      (node (ref U1) (pin 14)))
     (net (code 41) (name /LED4)
       (node (ref U1) (pin 13))
       (node (ref R4) (pin 2)))

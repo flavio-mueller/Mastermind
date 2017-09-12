@@ -1,4 +1,4 @@
-update=Mon 11 Sep 2017 02:31:11 PM CEST
+update=Tue 12 Sep 2017 11:37:44 AM CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -23,8 +23,6 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
@@ -70,3 +68,5 @@ LibName28=atmel
 LibName29=contrib
 LibName30=valves
 LibName31=sjf_mastermind
+[general]
+version=1
