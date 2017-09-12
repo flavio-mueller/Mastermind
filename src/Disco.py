@@ -29,7 +29,7 @@ def disco():
     #time.sleep(0.1)
 
 def discov2():
-    for i in range(63):
+    for i in range(64):
         neoPixel[i] = (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255))
     neoPixel.write()
     #time.sleep(0.1)
