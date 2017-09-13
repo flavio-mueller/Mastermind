@@ -311,7 +311,7 @@ def autoGuess():
 
         if (len(arrayOfAllStillPossibleCombinations) == 0):
             # output a fancy solved line
-            return
+            break
         row += 1
 
 
