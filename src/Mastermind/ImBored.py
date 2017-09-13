@@ -1,6 +1,6 @@
 try:
-    #from neopixel import NeoPixel
-    #from machine import Pin
+    from neopixel import NeoPixel
+    from machine import Pin
     import random
     import time
 except:
@@ -8,9 +8,9 @@ except:
 
 #neopixel
 
-#numPixel = 64
-#neoPin = Pin(18,Pin.OUT)
-#neoPixel = NeoPixel(neoPin, numPixel)
+numPixel = 64
+neoPin = Pin(18,Pin.OUT)
+neoPixel = NeoPixel(neoPin, numPixel)
 
 #constants
 green = (0,40,0)
@@ -19,9 +19,9 @@ red = (40,0,0)
 brown = (204,102,0)
 
 #buttons
-#button0 = Pin(12, Pin.IN)
-#button1 = Pin(13, Pin.IN)
-#button2 = Pin(14, Pin.IN)
+button0 = Pin(12, Pin.IN)
+button1 = Pin(13, Pin.IN)
+button2 = Pin(14, Pin.IN)
 
 colors = (white,green,red,brown)
 
@@ -34,6 +34,8 @@ frameRate = 4
 xCoordiante = 4
 yCoordinate = 2
 yForce = 0
+jumped = False
+jumpInput = False
 
 mapp = [[1, 1, 0, 0, 0, 0, 0, 0],
        [1, 0, 0, 0, 0, 0, 5, 0],
@@ -64,7 +66,7 @@ def ApplyMovement(x):
     xCoordiante = newX;
 
 
-'''def Draw():
+def Draw():
     global colors,mapp, xCoordiante,yCoordinate
     for x in range(0,8):
         for y in range(0,0):
@@ -75,28 +77,34 @@ def ApplyMovement(x):
 
 
     neoPixel[xCoordiante+ 8*yCoordinate] = colors[2]
-    neoPixel.write()'''
+    neoPixel.write()
 
 def Update():
-    global mapp
-    move = 1
-   # if(button0.value() == 1):
-    #    move += 1
-    #if(button1.value() == 1):
-     #   move -= 1
+    global mapp, jumpInput
+    move = 0
+    if(button0.value() == 1):
+       move += 1
+    if(button1.value() == 1):
+        move -= 1
+    if(jumpInput == True):
+        Jump()
+        jumpInput = False
 
     ApplyMovement(move)
     ApplyForce()
-    #Draw()
-    print(mapp)
-    print("x: ", xCoordiante, "y: ", yCoordinate)
+    Draw()
+    #print(mapp)
+    #print("x: ", xCoordiante, "y: ", yCoordinate)
 
 def ApplyForce():
-    global xCoordiante,yCoordinate,yForce,mapp
+    global xCoordiante,yCoordinate,yForce,mapp,jumped
     if(mapp[xCoordiante][(yCoordinate+1)%8] == 0):
         yForce += 1
     if(mapp[xCoordiante][(yCoordinate+1)%8] == 1):
-        yForce = 0
+        if(jumped == False):
+            yForce = 0
+        else:
+            jumped = False
 
     for x in range(0,abs(yForce)):
         if(yForce > 0):
@@ -109,11 +117,17 @@ def ApplyForce():
     if(yForce > 4):
         yForce = 4
 
-
+def Jump():
+    global mapp,xCoordiante, yCoordinate,yForce,jumped
+    if (mapp[xCoordiante][(yCoordinate + 1) % 8] == 1):
+        yForce = 2
+        jumped = True
 
 def MainLoop():
-    global startTime,lastFrameTime,deltatime,frameRate
+    global startTime,lastFrameTime,deltatime,frameRate, jumpInput
     while(True):
+        if(button2.value == 1):
+            jumpInput = True
         if(time.time()-(1/frameRate) > lastFrameTime):
             deltatime = time.time()-lastFrameTime
             lastFrameTime = time.time()
