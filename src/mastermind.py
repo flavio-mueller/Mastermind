@@ -1,7 +1,8 @@
 try:
     from neopixel import NeoPixel
     from machine import Pin
-    import random
+    import pyb
+    import time
 except:
     print("Imports are not available")
 
@@ -115,14 +116,18 @@ def checkButton3():
 
 def codeSetting():
     global state, curCol, colorSet, counter
+    button2LED(1)
+    timer = pyb.Timer(0)
+    timer.init(freq=4)
+    timer.callback(lambda t: pyb.button1LED(1).toggle())
     if counter == 4:
         print("Colors were set")
         counter = 0
         curCol = 0
+        timer.callback(None)
         button1LED(0)
         button2LED(0)
         state = state_codeGuessing
-    button2LED(1)
     if button1Released:
         curCol = (curCol + 1) % 6
         neoPixel[counter] = (colors[curCol])
@@ -138,13 +143,6 @@ def codeSetting():
             neoPixel[counter] = (colors[curCol])
             neoPixel.write()
 
-    """now = utime.time()
-    if now % 2 == 0:
-         button1LED(1)
-    else:
-         button1LED(0)
-    """
-
 
 def autoSet():
     global state
@@ -155,6 +153,9 @@ def autoSet():
 def codeGuessing():
     global state, curCol, counter, row, temBoolean, rowColorSet
     button2LED(1)
+    timer1 = pyb.Timer(1)
+    timer1.init(freq=4)
+    timer1.callback(lambda t: pyb.button1LED(1).toggle())
     if temBoolean:
         neoPixel[counter + 8 * row] = (colors[curCol])
         neoPixel.write()
@@ -181,6 +182,7 @@ def codeGuessing():
         counter = 0
         curCol = 0
         temBoolean = 1
+        timer1.callback(None)
         button1LED(0)
         button2LED(0)
         state = state_checking
@@ -258,7 +260,11 @@ def waitForReset():
 
 
 def reset():
-    global state
+    global state, counter
+    for i in range(numPixel):
+        neoPixel[i] = colWhite
+        neoPixel.write()
+        time.sleep(0.01)
     neoPixel.fill(colBlack)
     counter = 0
     neoPixel[counter] = (colors[curCol])
