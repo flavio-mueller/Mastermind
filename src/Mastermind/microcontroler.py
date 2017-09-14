@@ -10,14 +10,14 @@ except:
 
 #neopixel
 
-numPixel = 64
+numPixel = 64+64+8
 neoPin = Pin(18,Pin.OUT)
 neoPixel = NeoPixel(neoPin, numPixel)
 
 # global variables
 
-state = [0,0,0]
-oldState = [0,0,0]
+state = [0,0,0,0]
+oldState = [0,0,0,0]
 solution = [0,0,0,0]
 pointerIndex = 0
 colors = [(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,127)]
@@ -27,8 +27,8 @@ arrayOfAllStillPossibleCombinations = [[]]
 #buttons
 button0 = Pin(12, Pin.IN)
 button1 = Pin(13, Pin.IN)
-button2 = Pin(14, Pin.IN)
-
+button2 = Pin(14, Pin.IN)#not working
+button3 = Pin(17, Pin.IN)
 
 
 # returns the id of the pressed button or -1 if no button was pressed.
@@ -40,6 +40,8 @@ def CheckButtons():
         return 1
     if(oldState[2] == 1 and state[2] == 0):
         return 2
+    if(oldState[3] == 1 and state[3] == 0):
+        return 3
 
     return -1
 
@@ -49,11 +51,13 @@ def UpdateButtons():
     oldState[0] = state[0]
     oldState[1] = state[1]
     oldState[2] = state[2]
+    oldState[3] = state[3]
 
 
     state[0] = button0.value()
     state[1] = button1.value()
     state[2] = button2.value()
+    state[3] = button3.value()
 
 # Waits for input and returns next input
 def WaitForNextButtonInput():
@@ -66,12 +70,15 @@ def WaitForNextButtonInput():
 
 # let's the user choose the startcode
 def SetStartcode():
+    neoPixel.timing = 1
     global solution, pointerIndex
     while(True):
         SetSolutionLEDRow()
         SetCursorLed()
         test = WaitForNextButtonInput()
-        if(test == 2 or pointerIndex == 3):
+
+
+        if(test == 3):
             StartAlgorithm()
             break
         if(test == 1):

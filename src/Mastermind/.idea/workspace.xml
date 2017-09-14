@@ -18,30 +18,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="mastermind2.0.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mastermind2.0.py">
+      <file leaf-file-name="microcontroler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/microcontroler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="313" column="17" lean-forward="false" selection-start-line="313" selection-start-column="17" selection-end-line="313" selection-end-column="17" />
+            <state relative-caret-position="75">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding>
-                <element signature="e#4441#4861#0" expanded="false" />
+                <element signature="e#2288#2404#0" expanded="false" />
+                <element signature="e#2451#2530#0" expanded="false" />
+                <element signature="e#2582#2625#0" expanded="false" />
+                <element signature="e#2704#2805#0" expanded="false" />
+                <element signature="e#2928#3348#0" expanded="false" />
+                <element signature="e#3525#3934#0" expanded="false" />
+                <element signature="e#4018#4388#0" expanded="false" />
+                <element signature="e#4479#5000#0" expanded="false" />
+                <element signature="e#5048#5442#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="microcontroler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/microcontroler.py">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="188" column="28" lean-forward="true" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="29" />
-              <folding>
-                <element signature="e#2118#2234#0" expanded="false" />
-                <element signature="e#2281#2360#0" expanded="false" />
-                <element signature="e#2412#2455#0" expanded="false" />
-                <element signature="e#2534#2635#0" expanded="false" />
-                <element signature="e#2758#3178#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="350">
+              <caret line="59" column="70" lean-forward="true" selection-start-line="59" selection-start-column="70" selection-end-line="59" selection-end-column="70" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -71,9 +73,11 @@
       <list>
         <option value="$PROJECT_DIR$/arrayTest.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/ImBored.py" />
-        <option value="$PROJECT_DIR$/microcontroler.py" />
         <option value="$PROJECT_DIR$/mastermind2.0.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/microcontroler.py" />
+        <option value="$PROJECT_DIR$/ImBored.py" />
+        <option value="$PROJECT_DIR$/GoogleDisconnectGame.py" />
       </list>
     </option>
   </component>
@@ -105,7 +109,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -122,6 +125,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -348,16 +352,66 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="57" />
+      <option name="time" value="58" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/microcontroler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4075">
+          <caret line="163" column="12" lean-forward="false" selection-start-line="163" selection-start-column="12" selection-end-line="163" selection-end-column="12" />
+          <folding>
+            <element signature="e#2288#2404#0" expanded="false" />
+            <element signature="e#2451#2530#0" expanded="false" />
+            <element signature="e#2582#2625#0" expanded="false" />
+            <element signature="e#2704#2805#0" expanded="false" />
+            <element signature="e#2928#3348#0" expanded="false" />
+            <element signature="e#3525#3934#0" expanded="false" />
+            <element signature="e#4018#4388#0" expanded="false" />
+            <element signature="e#4479#5000#0" expanded="false" />
+            <element signature="e#5048#5442#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mastermind2.0.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/microcontroler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4525">
+          <caret line="181" column="0" lean-forward="true" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+          <folding>
+            <element signature="e#2288#2404#0" expanded="false" />
+            <element signature="e#2451#2530#0" expanded="false" />
+            <element signature="e#2582#2625#0" expanded="false" />
+            <element signature="e#2704#2805#0" expanded="false" />
+            <element signature="e#2928#3348#0" expanded="false" />
+            <element signature="e#3525#3934#0" expanded="false" />
+            <element signature="e#4018#4388#0" expanded="false" />
+            <element signature="e#4479#5000#0" expanded="false" />
+            <element signature="e#5048#5442#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ImBored.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -366,11 +420,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2118#2234#0" expanded="false" />
-            <element signature="e#2281#2360#0" expanded="false" />
-            <element signature="e#2412#2455#0" expanded="false" />
-            <element signature="e#2534#2635#0" expanded="false" />
-            <element signature="e#2758#3178#0" expanded="false" />
+            <element signature="e#2288#2404#0" expanded="false" />
+            <element signature="e#2451#2530#0" expanded="false" />
+            <element signature="e#2582#2625#0" expanded="false" />
+            <element signature="e#2704#2805#0" expanded="false" />
+            <element signature="e#2928#3348#0" expanded="false" />
+            <element signature="e#3525#3934#0" expanded="false" />
+            <element signature="e#4018#4388#0" expanded="false" />
+            <element signature="e#4479#5000#0" expanded="false" />
+            <element signature="e#5048#5442#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -410,6 +468,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mastermind2.0.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="231" column="28" lean-forward="false" selection-start-line="231" selection-start-column="28" selection-end-line="231" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/arrayTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -417,42 +482,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-750">
-          <caret line="51" column="55" lean-forward="true" selection-start-line="51" selection-start-column="55" selection-end-line="51" selection-end-column="55" />
+        <state relative-caret-position="-125">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoogleDisconnectGame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="706">
+          <caret line="73" column="10" lean-forward="true" selection-start-line="73" selection-start-column="10" selection-end-line="73" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ImBored.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+        <state relative-caret-position="-1844">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="37" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/microcontroler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="188" column="28" lean-forward="true" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="29" />
+        <state relative-caret-position="75">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="e#2118#2234#0" expanded="false" />
-            <element signature="e#2281#2360#0" expanded="false" />
-            <element signature="e#2412#2455#0" expanded="false" />
-            <element signature="e#2534#2635#0" expanded="false" />
-            <element signature="e#2758#3178#0" expanded="false" />
+            <element signature="e#2288#2404#0" expanded="false" />
+            <element signature="e#2451#2530#0" expanded="false" />
+            <element signature="e#2582#2625#0" expanded="false" />
+            <element signature="e#2704#2805#0" expanded="false" />
+            <element signature="e#2928#3348#0" expanded="false" />
+            <element signature="e#3525#3934#0" expanded="false" />
+            <element signature="e#4018#4388#0" expanded="false" />
+            <element signature="e#4479#5000#0" expanded="false" />
+            <element signature="e#5048#5442#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mastermind2.0.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="313" column="17" lean-forward="false" selection-start-line="313" selection-start-column="17" selection-end-line="313" selection-end-column="17" />
-          <folding>
-            <element signature="e#4441#4861#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="350">
+          <caret line="59" column="70" lean-forward="true" selection-start-line="59" selection-start-column="70" selection-end-line="59" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
