@@ -1,12 +1,9 @@
-try:
-    from neopixel import NeoPixel
-    from machine import Pin
-    import random
-    import pyb
-    import time
-    import gc
-except:
-    print("Imports are not available")
+from neopixel import NeoPixel
+from machine import Pin
+import random
+# import pyb
+import time
+import gc
 
 state_codeSetting = 0
 state_autoSet = 1
@@ -20,31 +17,32 @@ state_reset = 8
 
 state = state_reset
 
-numPixel = 64
-maxRows = 8
+maxRows = 17
+numPixel = (maxRows * 8)
 neoPin = Pin(18, Pin.OUT)
 
 neoPixel = NeoPixel(neoPin, numPixel)
+neoPixel.timing = 1
 
 button1 = Pin(12, Pin.IN)
 button2 = Pin(13, Pin.IN)
-button3 = Pin(14, Pin.IN)
-# button4 = Pin(15, Pin.IN)
+button3 = Pin(17, Pin.IN)
+button4 = Pin(14, Pin.IN)
 
-button1LED = Pin(25, Pin.OUT)
-button2LED = Pin(26, Pin.OUT)
-button3LED = Pin(27, Pin.OUT)
-# button4LED = Pin(28, Pin.OUT)
+button1LED = Pin(32, Pin.OUT)
+button2LED = Pin(33, Pin.OUT)
+button3LED = Pin(34, Pin.OUT)
+button4LED = Pin(35, Pin.OUT)
 
 button1State = 0
 button2State = 0
 button3State = 0
-# button4State = 0
+button4State = 0
 
 button1Released = 0
 button2Released = 0
 button3Released = 0
-# button4Released = 0
+button4Released = 0
 
 brightness = 10
 
@@ -104,10 +102,15 @@ def checkButton3():
     if button3Released:
         print("button3 was pressed")
         state = state_reset
+        #CODEFORAUTOGUESS
+        if state == state_codeSetting:
+            state = state_autoSet
+        elif state == state_codeGuessing:
+            state = state_autoGuess
 
-"""
+
 def checkButton4():
-    global button4State
+    global button4State, state
     global button4Released
     button4StateOld = button4State
     button4State = button4.value()
@@ -118,26 +121,29 @@ def checkButton4():
             state = state_autoSet
         elif state == state_codeGuessing:
             state = state_autoGuess
-"""
 
 
 def codeSetting():
     global state, curCol, colorSet, counter
     button2LED(1)
-    timer = pyb.Timer(0)
-    timer.init(freq=4)
-    timer.callback(lambda t: pyb.button1LED(1).toggle())
+    # timer = pyb.Timer(0)
+    # timer.init(freq=4)
+    # timer.callback(lambda t: pyb.button1LED(1).toggle())
     if counter == 4:
         print("Colors were set")
         counter = 0
         curCol = 0
-        timer.callback(None)
+        # timer.callback(None)
         button1LED(0)
         button2LED(0)
         state = state_codeGuessing
+        time.sleep(2)
+        for i in range(8):
+            neoPixel[i] = colBlack
+        neoPixel.write()
     if button1Released:
         curCol = (curCol + 1) % 6
-        neoPixel[counter] = (colors[curCol])
+        neoPixel[7 - counter] = (colors[curCol])
         neoPixel.write()
         print("Next Color")
 
@@ -147,7 +153,7 @@ def codeSetting():
         curCol = 0
         counter += 1
         if counter < 4:
-            neoPixel[counter] = (colors[curCol])
+            neoPixel[7 - counter] = (colors[curCol])
             neoPixel.write()
 
 
@@ -155,7 +161,7 @@ def autoSet():
     global state
     print(state)
     colorSet = (random.randrange(0, 6), random.randrange(0, 6), random.randrange(0, 6), random.randrange(0, 6))
-    for i in range (4):
+    for i in range(4):
         neoPixel[i] = colorSet[i]
     neoPixel.write()
     state = state_codeGuessing
@@ -164,9 +170,9 @@ def autoSet():
 def codeGuessing():
     global state, curCol, counter, row, temBoolean, rowColorSet
     button2LED(1)
-    timer1 = pyb.Timer(1)
-    timer1.init(freq=4)
-    timer1.callback(lambda t: pyb.button1LED(1).toggle())
+    # timer1 = pyb.Timer(1)
+    # timer1.init(freq=4)
+    # timer1.callback(lambda t: pyb.button1LED(1).toggle())
     if temBoolean:
         neoPixel[counter + 8 * row] = (colors[curCol])
         neoPixel.write()
@@ -193,7 +199,7 @@ def codeGuessing():
         counter = 0
         curCol = 0
         temBoolean = 1
-        timer1.callback(None)
+        # timer1.callback(None)
         button1LED(0)
         button2LED(0)
         state = state_checking
@@ -371,7 +377,8 @@ def checking():
 def won():
     global state
     print("You have won")
-    neoPixel.fill(colGreen)
+    for j in range(8):
+        neoPixel[j + 8 * (row + 1)] = colGreen
     neoPixel.write()
     state = state_waitForReset
 
@@ -390,14 +397,19 @@ def waitForReset():
 
 
 def reset():
-    global state, counter
+    global state, counter, row, colorSet, rowColorSet, temBoolean, arrayOfAllStillPossibleCombinations
     for i in range(numPixel):
         neoPixel[i] = colWhite
         neoPixel.write()
-        time.sleep(0.01)
+        time.sleep_ms(5)
     neoPixel.fill(colBlack)
+    colorSet = [0, 0, 0, 0]
+    rowColorSet = [[0 for x in range(6)] for y in range(maxRows)]
+    temBoolean = 1
+    row = 1
     counter = 0
-    neoPixel[counter] = (colors[curCol])
+    arrayOfAllStillPossibleCombinations = [[]]
+    neoPixel[7 + counter] = (colors[curCol])
     neoPixel.write()
     state = state_codeSetting
     print("Game was reseted")
@@ -407,7 +419,7 @@ while True:
     checkButton1()
     checkButton2()
     checkButton3()
-    # checkButton4()
+    checkButton4()
 
     if state == state_codeSetting:
         codeSetting()
