@@ -5,6 +5,7 @@ try:
     import time
     import math
     import  gc
+    import utime
 except:
     print("Imports are not available")
 
@@ -178,3 +179,4 @@ while len(combinations) != 0:
         
     gc.collect()
     tries += 1
+    utime.sleep_ms(500)
