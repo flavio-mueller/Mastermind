@@ -3,6 +3,7 @@ from machine import Pin
 import random
 # import pyb
 import time
+import utime
 import gc
 
 state_codeSetting = 0
@@ -101,12 +102,12 @@ def checkButton3():
     button3Released = button3StateOld == 1 and button3State == 0
     if button3Released:
         print("button3 was pressed")
-        state = state_reset
+        #state = state_reset
         #CODEFORAUTOGUESS
-        #if state == state_codeSetting:
-        #    state = state_autoSet
-        #elif state == state_codeGuessing:
-        #    state = state_autoGuess
+        if state == state_codeSetting:
+            state = state_autoSet
+        elif state == state_codeGuessing:
+            state = state_autoGuess
 
 
 def checkButton4():
@@ -126,14 +127,15 @@ def checkButton4():
 def codeSetting():
     global state, curCol, colorSet, counter
     button2LED(1)
-    # timer = pyb.Timer(0)
-    # timer.init(freq=4)
-    # timer.callback(lambda t: pyb.button1LED(1).toggle())
+    random.seed(utime.ticks_ms())
+    if int(time.time()) % 2 == 0:
+        button1LED(1)
+    else:
+        button1LED(0)
     if counter == 4:
         print("Colors were set")
         counter = 0
         curCol = 0
-        # timer.callback(None)
         button1LED(0)
         button2LED(0)
         state = state_codeGuessing
@@ -158,11 +160,16 @@ def codeSetting():
 
 
 def autoSet():
-    global state
+    global state, colorSet, counter
     print(state)
     colorSet = (random.randrange(0, 6), random.randrange(0, 6), random.randrange(0, 6), random.randrange(0, 6))
     for i in range(4):
-        neoPixel[i] = colorSet[i]
+        neoPixel[7 - i] = (colors[colorSet[i]])
+    neoPixel.write()
+    time.sleep(2)
+    for i in range(8):
+        neoPixel[i] = colBlack
+    counter = 0
     neoPixel.write()
     state = state_codeGuessing
 
@@ -170,9 +177,10 @@ def autoSet():
 def codeGuessing():
     global state, curCol, counter, row, temBoolean, rowColorSet
     button2LED(1)
-    # timer1 = pyb.Timer(1)
-    # timer1.init(freq=4)
-    # timer1.callback(lambda t: pyb.button1LED(1).toggle())
+    if int(time.time()) % 2 == 0:
+        button1LED(1)
+    else:
+        button1LED(0)
     if temBoolean:
         neoPixel[counter + 8 * row] = (colors[curCol])
         neoPixel.write()
@@ -199,7 +207,6 @@ def codeGuessing():
         counter = 0
         curCol = 0
         temBoolean = 1
-        # timer1.callback(None)
         button1LED(0)
         button2LED(0)
         state = state_checking
@@ -232,6 +239,8 @@ def compare(a, b):
 def autoGuess():
     global state, colorSet, rowColorSet, arrayOfAllStillPossibleCombinations, row
     print(state)
+
+    gc.collect()
 
     # create array of all permutations
     arrayOfAllStillPossibleCombinations = [[None for _ in range(4)] for _ in range(1296)]
@@ -377,8 +386,10 @@ def checking():
 def won():
     global state
     print("You have won")
-    for j in range(8):
-        neoPixel[j + 8 * (row + 1)] = colGreen
+    for i in range(8):
+        neoPixel[i + 8 * (row + 1)] = colGreen
+    for j in range(4):
+        neoPixel[7 - j] = (colors[colorSet[j]])
     neoPixel.write()
     state = state_waitForReset
 
@@ -387,6 +398,10 @@ def outOfTries():
     global state
     print("No tries left")
     neoPixel.fill(colRed)
+    for i in range(8):
+        neoPixel[i] = colBlack
+    for j in range(4):
+        neoPixel[7 - j] = (colors[colorSet[j]])
     neoPixel.write()
     state = state_waitForReset
 
@@ -401,7 +416,8 @@ def reset():
     for i in range(numPixel):
         neoPixel[i] = colWhite
         neoPixel.write()
-        time.sleep_ms(5)
+        neoPixel[i] = colBlack
+        time.sleep_ms(7)
     neoPixel.fill(colBlack)
     colorSet = [0, 0, 0, 0]
     rowColorSet = [[0 for x in range(6)] for y in range(maxRows)]
