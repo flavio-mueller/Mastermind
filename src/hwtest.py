@@ -24,8 +24,9 @@ while True:
             led.value(0 if led.value() else 1)
 
         # clear board
-        for j in range(NEOPIXEL_SIZE):
-            d[j] = (0, 0, 0)
+        d.fill((0, 0, 0))
+        # for j in range(NEOPIXEL_SIZE):
+        # d[j] = (0, 0, 0)
 
         d[i] = (100, 0, 100)
         d.write()
