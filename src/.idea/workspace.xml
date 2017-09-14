@@ -36,8 +36,8 @@
       <file leaf-file-name="MastermindWithAutoSolve.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MastermindWithAutoSolve.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2952">
-              <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+            <state relative-caret-position="363">
+              <caret line="108" column="9" lean-forward="false" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -116,8 +116,8 @@
         <option value="$PROJECT_DIR$/timeresr.py" />
         <option value="$PROJECT_DIR$/Disco.py" />
         <option value="$PROJECT_DIR$/Mastermind.py" />
-        <option value="$PROJECT_DIR$/MastermindWithAutoSolve.py" />
         <option value="$PROJECT_DIR$/Tetris.py" />
+        <option value="$PROJECT_DIR$/MastermindWithAutoSolve.py" />
       </list>
     </option>
   </component>
@@ -482,8 +482,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MastermindWithAutoSolve.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2952">
-          <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+        <state relative-caret-position="363">
+          <caret line="108" column="9" lean-forward="false" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>

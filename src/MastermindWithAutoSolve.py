@@ -103,10 +103,10 @@ def checkButton3():
         print("button3 was pressed")
         state = state_reset
         #CODEFORAUTOGUESS
-        if state == state_codeSetting:
-            state = state_autoSet
-        elif state == state_codeGuessing:
-            state = state_autoGuess
+        #if state == state_codeSetting:
+        #    state = state_autoSet
+        #elif state == state_codeGuessing:
+        #    state = state_autoGuess
 
 
 def checkButton4():
