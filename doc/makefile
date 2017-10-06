@@ -9,7 +9,7 @@ RES_SRC := $(wildcard $(RES_DIR)/*.svg)
 RES := $(patsubst %.svg,%.pdf,$(RES_SRC))
 
 # compiler settings
-TEX := texfot latex
+TEX := texfot lualatex
 
 # recipes
 .PHONY: all dir clean
