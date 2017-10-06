@@ -1,1 +1,2 @@
-doc/build
+doc/build/*
+!doc/build/*.pdf
