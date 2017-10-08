@@ -3,6 +3,8 @@
 % debug layout
 %\usepackage{showframe}
 
+% titles
+\usepackage{titlesec}
 % clickable urls
 \usepackage[hyphens]{url}
 % captions
@@ -79,8 +81,10 @@
 \begin{document}
 \maketitle
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt} 
+%\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt} 
+\titlespacing*{\section}{0pt}{0.5\baselineskip}{0.4\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.5\baselineskip}{0.4\baselineskip}
 
 \section*{Abstract}
 The Mastermind Game Platform is a multi use arcade electronic platform
@@ -95,6 +99,9 @@ Many technical challenges were encountered such as limited dynamic
 memory and hardware failures but the final prototype was complete with
 all of  the previously mentioned features.
 
+%\begingroup
+%\setlength\intextsep{0pt}
+
 \section{Introduction}
 The goal for our project is to prepare a working prototype for an
 electronic version of a classic board game called “Mastermind”. The
@@ -102,18 +109,16 @@ secondary goal is to implement an algorithm that plays the game on its
 own, possibly better than how human would. Lastly a third objective is
 to extend the platform be able to run other games such as Tetris or
 Snake.
-
-\begingroup
-\setlength\intextsep{0pt}
-\begin{wrapfigure}{r}{.35\textwidth}
+\begin{wrapfigure}{r}{.375\textwidth}
+    %\vspace{-2cm}
+    \adjincludegraphics[%
+        width=\linewidth,%
+        trim={0 {.12\height} 0 {0.1\height}},%
+        clip%
+    ]{res/mastermind_set.png}
     \caption{A classic set of Mastermind \cite{classicmastermind}} 
     \label{fig:mset}
-    \adjincludegraphics[%
-        width=.9\linewidth,%
-        trim={0 {.12\height} 0 {.1\height}},%
-        clip%
-    ]{res/mastermind_set}
-    \vspace{-1cm}
+    \vspace{-1.5cm}
 \end{wrapfigure}
 
 \subsection{Mastermind Game Rules}
@@ -124,14 +129,15 @@ represented by colors with plastic or wood pegs. The classic variant has
 a code of 4 pegs of 6 colors and a maximum of 12 attempts. To begin, the
 code breaker sets a code, then the code maker gives a feedback (hint)
 based on the following rules by placing a peg on the side of the board.
+
 \begin{itemize}
     \item There is a correctly colored peg in the correct position.
     \item There is a correctly colored peg, but in the wrong position.
 \end{itemize}
+
 Note that the hint does not indicate which pegs are correct or wrong.
 The code breaker wins when he discovers the code, or loses if he runs of
 out of attempts.
-\endgroup
 
 \subsection{Platform requirements}
 The game platform will need to replicate the features of the original
